@@ -24,4 +24,4 @@ CREATE TABLE department (
 
 insert into employee  (id, first_name, last_name, role_id, manager_id)
 values
-(54, "Nathan", "Huber", 1, 1);
+(54, "Nathan", "Huber", 1, null);

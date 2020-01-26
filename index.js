@@ -54,6 +54,18 @@ function start() {
 
         case "View All Employees By Manager":
           listByMngr();
+
+          break;
+        case "Add Employee":
+          addEmployee();
+          break;
+
+        case "Remove Employee":
+          start();
+          break;
+
+        case "Update Employee Role":
+          start();
           break;
 
         case "Exit":          
@@ -62,6 +74,8 @@ function start() {
             connection.end();
             process.exit();
       }
+    });
+  }
 
 
 // function to handle listing employees
@@ -107,17 +121,52 @@ function listByMngr() {
   });
 }
 
+function addEmployee() {
+
+  inquirer
+  .prompt([
+    {
+    name: "firstName",
+    type: "input",
+    message: "What is the employee's first name?"
+    },
+    {
+    name: "lastName",
+    type: "input",
+    message: "What is the employee's last name?"
+    },
+    {  
+    name: "empRole",
+    type: "input",
+    message: "Select a Role for answer.firstName ",
+    },
+   {  
+    name: "managerId",
+    type: "input",
+    message: "What is the employee's role?"
+    },    
+   ])
+    .then(function(answer) {
+  
+  connection.query(
+    "INSERT INTO employee SET?",
+    {
+     first_name: answer.firstName,
+     last_name: answer.lastName,
+     role_id: answer.empRole,
+     manager_id: answer.managerId 
+    },
+    function(err) {
+      if (err) throw err;
+      console.log();
+      console.log();
+      console.log("Employee added.");
+      console.log();
+      console.log();
+      start();
+    });
+  })
 
 
 
-
-
-
-
-
-
-
-
-    })
-  };
-
+};
